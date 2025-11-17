@@ -1,78 +1,97 @@
 # Requests
 
-**Requests** is a simple, yet elegant, HTTP library.
+**Requests** is a simple, yet elegant HTTP library that makes human-friendly HTTP for the Python community.
 
-```python
->>> import requests
->>> r = requests.get('https://httpbin.org/basic-auth/user/pass', auth=('user', 'pass'))
->>> r.status_code
-200
->>> r.headers['content-type']
-'application/json; charset=utf8'
->>> r.encoding
-'utf-8'
->>> r.text
-'{"authenticated": true, ...'
->>> r.json()
-{'authenticated': True, ...}
-```
-
-Requests allows you to send HTTP/1.1 requests extremely easily. There’s no need to manually add query strings to your URLs, or to form-encode your `PUT` & `POST` data — but nowadays, just use the `json` method!
-
-Requests is one of the most downloaded Python packages today, pulling in around `30M downloads / week`— according to GitHub, Requests is currently [depended upon](https://github.com/psf/requests/network/dependents?package_id=UGFja2FnZS01NzA4OTExNg%3D%3D) by `1,000,000+` repositories. You may certainly put your trust in this code.
+| | |
+| --- | --- |
+| **Install** | `python -m pip install requests` |
+| **Docs** | [requests.readthedocs.io](https://requests.readthedocs.io) |
+| **Python** | 3.9+ (matches `python_requires` in `setup.py`) |
 
 [![Downloads](https://static.pepy.tech/badge/requests/month)](https://pepy.tech/project/requests)
 [![Supported Versions](https://img.shields.io/pypi/pyversions/requests.svg)](https://pypi.org/project/requests)
 [![Contributors](https://img.shields.io/github/contributors/psf/requests.svg)](https://github.com/psf/requests/graphs/contributors)
 
-## Installing Requests and Supported Versions
+Requests lets you send HTTP/1.1 requests with minimal boilerplate—no manual query string building, no manual form encoding, and plenty of sensible defaults for TLS, sessions, redirects, and more.
 
-Requests is available on PyPI:
+## Quickstart
 
-```console
-$ python -m pip install requests
+Perform a basic `GET`, validate the response, and parse JSON in just a few lines:
+
+```python
+import requests
+
+response = requests.get("https://httpbin.org/get", timeout=5)
+response.raise_for_status()
+payload = response.json()
+
+print(f"Status: {response.status_code}")
+print(f"Origin IP: {payload['origin']}")
 ```
 
-Requests officially supports Python 3.9+.
+Add a session when you need connection pooling, shared headers, or authentication:
 
-## Supported Features & Best–Practices
+```python
+import requests
 
-Requests is ready for the demands of building robust and reliable HTTP–speaking applications, for the needs of today.
+with requests.Session() as session:
+    session.auth = ("user", "pass")
+    session.headers.update({"User-Agent": "example-app/1.0"})
 
-- Keep-Alive & Connection Pooling
-- International Domains and URLs
-- Sessions with Cookie Persistence
-- Browser-style TLS/SSL Verification
-- Basic & Digest Authentication
-- Familiar `dict`–like Cookies
-- Automatic Content Decompression and Decoding
-- Multi-part File Uploads
-- SOCKS Proxy Support
-- Connection Timeouts
-- Streaming Downloads
-- Automatic honoring of `.netrc`
-- Chunked HTTP Requests
+    response = session.get("https://httpbin.org/basic-auth/user/pass", timeout=5)
+    response.raise_for_status()
 
-## API Reference and User Guide available on [Read the Docs](https://requests.readthedocs.io)
+    print(response.json())  # {'authenticated': True, 'user': 'user'}
+```
 
-[![Read the Docs](https://raw.githubusercontent.com/psf/requests/main/ext/ss.png)](https://requests.readthedocs.io)
+Prefer `response.raise_for_status()` before inspecting content so exceptions surface immediately, and reach for `.json()` to safely decode JSON bodies.
 
-## Cloning the repository
+## When You Need…
 
-When cloning the Requests repository, you may need to add the `-c
-fetch.fsck.badTimezone=ignore` flag to avoid an error about a bad commit timestamp (see
-[this issue](https://github.com/psf/requests/issues/2690) for more background):
+| Task | Documentation |
+| --- | --- |
+| A deeper tour of the API | [User Quickstart](https://requests.readthedocs.io/en/latest/user/quickstart/) |
+| Handling authentication schemes | [Authentication](https://requests.readthedocs.io/en/latest/user/authentication/) |
+| Uploading files and forms | [POST a Multipart-Encoded File](https://requests.readthedocs.io/en/latest/user/advanced/#post-a-multipart-encoded-file) |
+| Streaming downloads | [Streaming Requests](https://requests.readthedocs.io/en/latest/user/advanced/#streaming-requests) |
+| Working with timeouts and retries | [Advanced Usage](https://requests.readthedocs.io/en/latest/user/advanced/) |
+
+## Key Capabilities
+
+- **Keep-Alive & Connection Pooling** – Sessions reuse sockets automatically for efficient throughput.
+- **International Domains & URLs** – Unicode domain names and paths are transparently encoded.
+- **Cookie Persistence** – Session cookies behave like browser storage with a familiar dict-style API.
+- **TLS/SSL Verification** – Certificate verification and host checking are on by default, with hooks for custom CAs.
+- **Authentication Helpers** – Built-in support for Basic, Digest, and pluggable auth flows.
+- **Automatic Decoding** – Content encodings such as gzip and deflate are decoded for you.
+- **File Uploads & Streaming** – Send and receive large payloads without loading everything into memory.
+- **Proxy & SOCKS Support** – Route requests through HTTP and SOCKS proxies with one configuration value.
+- **Timeouts & Retries** – Tune networking behavior to match production reliability requirements.
+- **`.netrc` Integration** – Respect existing `.netrc` credentials when present.
+
+## Supported Versions
+
+Requests supports Python 3.9 and newer. This matches the `python_requires=">=3.9"` metadata enforced during installation (see `setup.py`). For older Python versions, install a Requests release earlier than 2.32.0.
+
+## Contributing
+
+When cloning the repository, you may need the `-c fetch.fsck.badTimezone=ignore` flag to avoid a Git warning about a historical commit (see [issue #2690](https://github.com/psf/requests/issues/2690)):
 
 ```shell
 git clone -c fetch.fsck.badTimezone=ignore https://github.com/psf/requests.git
 ```
 
-You can also apply this setting to your global Git config:
+To run the test suite, install development dependencies and invoke `pytest`:
 
 ```shell
-git config --global fetch.fsck.badTimezone ignore
+python -m pip install -r requirements-dev.txt
+python -m pytest
 ```
 
+Interested in contributing? Start with the guidelines in [docs/dev/contributing.rst](docs/dev/contributing.rst) and the broader [Requests community resources](https://requests.readthedocs.io/en/latest/community/).
+
 ---
+
+[![Read the Docs](https://raw.githubusercontent.com/psf/requests/main/ext/ss.png)](https://requests.readthedocs.io)
 
 [![Kenneth Reitz](https://raw.githubusercontent.com/psf/requests/main/ext/kr.png)](https://kennethreitz.org) [![Python Software Foundation](https://raw.githubusercontent.com/psf/requests/main/ext/psf.png)](https://www.python.org/psf)
