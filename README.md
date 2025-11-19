@@ -25,6 +25,28 @@ Requests is one of the most downloaded Python packages today, pulling in around 
 [![Supported Versions](https://img.shields.io/pypi/pyversions/requests.svg)](https://pypi.org/project/requests)
 [![Contributors](https://img.shields.io/github/contributors/psf/requests.svg)](https://github.com/psf/requests/graphs/contributors)
 
+## Project Overview
+
+Requests was created to make HTTP calls feel like first-class Python, hiding the complexity of sockets, decoders, and connection management behind a friendly interface. Over the years, it has evolved alongside the Python ecosystem and web standards, all while keeping a human-readable API at its core. Whether you are building command-line utilities, data pipelines, or production web services, the library provides the same dependable experience.
+
+The project is maintained by a team of volunteers working within the Python Software Foundation. Each release goes through community review, automated testing across supported platforms, and rigorous compatibility checks with popular dependencies. If you are curious about how decisions are made, the [project roadmap](https://github.com/psf/requests/projects) and the [issue tracker](https://github.com/psf/requests/issues) are great entry points.
+
+### Philosophy & Design Goals
+
+- **Simplicity first**: Core APIs map cleanly to HTTP verbs and concepts so that your code reads the way you describe it out loud.
+- **Robust defaults**: Sensible timeout behavior, TLS verification, and persistent sessions are baked in to reduce the chance of surprises in production.
+- **Extensibility**: Hooks, transport adapters, and streaming interfaces let you integrate Requests into everything from microservices to desktop applications.
+- **Community driven**: Governance happens in the open, and we rely on a vast contributor base to keep documentation, tests, and features in sync.
+
+### Getting Started Quickly
+
+1. Install via `pip`, `pipx`, or add `requests` to your project’s `pyproject.toml` dependencies.
+2. Explore the `requests.get`, `requests.post`, and `requests.Session` APIs, which cover the majority of use cases.
+3. Review the [advanced usage guide](https://requests.readthedocs.io/en/latest/user/advanced/) to learn about streaming uploads/downloads, custom authentication, and transport adapters.
+4. Run your integration tests with `REQUESTS_CA_BUNDLE` or `CURL_CA_BUNDLE` set when you need to point at custom certificate stores.
+
+If you are upgrading from an earlier release, take a moment to read the changelog in `HISTORY.md`. Each entry highlights new features, deprecations, and any behavioral changes that might require code updates, so you can plan your rollout with confidence.
+
 ## Installing Requests and Supported Versions
 
 Requests is available on PyPI:
