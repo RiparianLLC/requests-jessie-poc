@@ -6,6 +6,15 @@ dev
 
 - \[Short description of non-trivial change.\]
 
+2.32.6 (2025-11-19)
+-------------------
+
+**Packaging**
+- Synchronized the canonical version metadata for the 2.32.6 hotfix release.
+
+**Documentation**
+- Added release notes covering the 2.32.6 maintenance release.
+
 2.32.5 (2025-08-18)
 -------------------
 
