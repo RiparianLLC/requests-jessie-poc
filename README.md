@@ -1,8 +1,8 @@
 # Requests
 
-Requests is the simple, human-friendly HTTP library for Python. It wraps the standard library modules so you can send HTTP requests and work with responses in a few readable lines.
+Requests is the human-friendly HTTP client for Python, letting you send HTTP/1.1 requests with minimal code.
 
-## Quick start
+Copy this snippet to make your first request:
 
 ```python
 import requests
@@ -14,20 +14,13 @@ print(response.json())
 
 ## Install
 
-Requests supports Python 3.9+. Install the latest release with:
+- Python 3.9+ supported.
+- Install with `python -m pip install requests`.
+- Optional extras: see the install guide in the documentation.
 
-```console
-python -m pip install requests
-```
-
-Optional extras are available, for example `python -m pip install "requests[socks]"`.
-
-## Learn more
+## Dig deeper
 
 - Documentation: https://requests.readthedocs.io
 - Release notes: `HISTORY.md`
 - Source: https://github.com/psf/requests
-
-## Contribute
-
-Open issues, discussions, and pull requests on GitHub. See `CONTRIBUTING.md` for guidelines and tests.
+- Contributing guide: `CONTRIBUTING.md`
