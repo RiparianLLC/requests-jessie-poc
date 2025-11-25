@@ -275,6 +275,11 @@ r.raise_for_status()
 
 ![Read the Docs screenshot](https://raw.githubusercontent.com/psf/requests/main/ext/ss.png)
 
+## Authors
+
+- Kenneth Reitz
+- Chrissy Steinmeier
+
 ## Contributing
 
 1. Fork the repository and clone it locally. If you encounter Git complaints
